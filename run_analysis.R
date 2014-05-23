@@ -16,7 +16,7 @@
 
 
 ##may need to change to navigate to correct directory
-##setwd("./Getting and Cleaning Data Peer Assessment")
+##setwd("./Getting-and-Cleaning-Data-Course-Project")
 ##use of the reshape2 package is necessary for Part 5 below
 
 
