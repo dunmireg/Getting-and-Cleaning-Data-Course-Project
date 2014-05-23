@@ -33,7 +33,7 @@ This file lists the variables used in Glenn Dunmire's run_analysis.R script.
 
    Transform activity, making all letters lowercase and then uppercasing where appropriate and removing punctuation. 
 
-   Update yLabel = add a column of NAs to yLabel. Then for example, for every 1 in yLabel[,2], replace with the string "walking" (pulled from activity). Then replace the column names for yLabel with "activity_ID" and "activity"
+   Update yLabel = add a column of NAs to yLabel. Then for example, for every 1 in yLabel[x,1], replace the NA in yLabel[x,2] with the string "walking" (pulled from activity). Do this for all x in 1:nrow(yLabel). Then replace the column names for yLabel with "activity_ID" and "activity"
 
    Update subjects = replace V1 column name in subjects with "subject"
 
