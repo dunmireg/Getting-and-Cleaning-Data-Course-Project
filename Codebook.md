@@ -27,11 +27,11 @@ This file lists the variables used in Glenn Dunmire's run_analysis.R script.
 
    Update dataX = now subset the dataX vector containing all the X data with only the features we are interested in. That is, take the subset of the original dataX (from 1 above) where the rows are equal to the values in meanAndStd. This new dataX is a 10,299 x 79 data frame containing only features including "mean()" and "std()". Also update the names of the columns in dataX by getting the names from the second column of the meanAndStd data frame, replacing the column headers from V1 to something human readable. 
 
-Now: clean the names on dataX, removing punctuation and capitalizing "mean()" and "std()" resulting in variable names that are readable and properly formatted
+   Now: clean the names on dataX, removing punctuation and capitalizing "mean()" and "std()" resulting in variable names that are readable and properly formatted
 
 4. activity = a 6x2 data frame containing the code for each activity and its corresponding character (eg 1 = walking). Result of reading the table activity_labels.txt
 
-Transform activity, making all letters lowercase and then uppercasing where appropriate and removing punctuation. 
+   Transform activity, making all letters lowercase and then uppercasing where appropriate and removing punctuation. 
 
    Update yLabel = go through the yLabel data frame and for each numeric value in each row, find what the corresponding character is from activity. For example, for every 1 in yLabel, replace with the string "walking". Then replace the column name for yLabel (V1) with "activities"
 
@@ -43,6 +43,6 @@ Transform activity, making all letters lowercase and then uppercasing where appr
 
    finalTidy = a wide-format 180x81 data frame that is the result of the dcast() function on molten, using "subject" and "activities" as id variables and mean as the aggregating function. 
 
-Write the finalTidy data frame as a text file called "final_Tidy_Means.txt" in the working directory  
+   Write the finalTidy data frame as a text file called "final_Tidy_Means.txt" in the working directory  
 
 
