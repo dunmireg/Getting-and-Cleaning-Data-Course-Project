@@ -89,33 +89,37 @@ substr(activity[3,2], 8, 8) <- toupper(substr(activity[3,2], 8, 8))
 #remove "-"
 activity[,2] <- gsub("_", "", activity[,2])
 
-##use a for loop to go through each value in the column V1 in yLabel, access the numeric value stored
-##there, and based on cascading if statements match the correct string from activity_labels.txt. This
+##add a column of NAs to yLabel
+yLabel[,2] <- character() 
+
+##use a for loop to go through each value in the column V2 in yLabel, access the numeric value stored
+##in V1, and based on cascading if statements match the correct string from activity_labels.txt. This
 ##can also be done using the join() function from the plyr package but I wrote this to avoid requiring
 ##a package. 
 for (i in 1:nrow(yLabel)) {
   if(yLabel[i,1] == 1) {
-    yLabel[i,1] <- activity[1,2]
+    yLabel[i,2] <- activity[1,2]
   }
   else if (yLabel[i,1] == 2) {
-    yLabel[i,1] <- activity[2,2]
+    yLabel[i,2] <- activity[2,2]
   }
   else if (yLabel[i,1] == 3) {
-    yLabel[i,1] <- activity[3,2]
+    yLabel[i,2] <- activity[3,2]
   }
   else if (yLabel[i,1] == 4) {
-    yLabel[i,1] <- activity[4,2]
+    yLabel[i,2] <- activity[4,2]
   }
   else if (yLabel[i,1] == 5) {
-    yLabel[i,1] <- activity[5,2]
+    yLabel[i,2] <- activity[5,2]
   }
   else {
-    yLabel[i,1] <- activity[6,2]
+    yLabel[i,2] <- activity[6,2]
   }
 }
 
-##replace V1 with "activities"
-names(yLabel) <- "activities"
+
+##replace V1 with "activity_ID" and "activity"
+names(yLabel) <- c("activity_ID", "activity")
 
 
 
@@ -146,12 +150,12 @@ if(require("reshape2")){
   }
 }
 
-#use melt to produce a long-format dataset organized with subject and activities as id variables
-molten <- melt(cleanResult, id = c("subject", "activities"))
+#use melt to produce a long-format dataset organized with subject, activity_ID, and activity as id variables
+molten <- melt(cleanResult, id = c("subject","activity_ID", "activity"))
 
-##cast the long-format dataset to a wide-format dataset using subject and activities
+##cast the long-format dataset to a wide-format dataset using subject, activity_ID, and activity
 ##as id variables and using the mean function to aggregate the data
-finalTidy <- dcast(molten, subject + activities ~ variable, fun.aggregate = mean)
+finalTidy <- dcast(molten, subject + activity_ID + activity ~ variable, fun.aggregate = mean)
 
 ##write the final wide dataset to the working directory as a text file
 print("writing final output to working directory")
